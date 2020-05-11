@@ -1,12 +1,17 @@
 package com.kang.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +26,8 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name="tb_user")
-public class MyUser implements Serializable {
+public class MyUser implements UserDetails, Serializable {
 
-	
 	/**
 	 * 
 	 */
@@ -36,9 +40,6 @@ public class MyUser implements Serializable {
 
 	private String pwd;
 	
-	
-	private String userName;
-
 	private String tel;
 	
 	private String icon;
@@ -66,6 +67,23 @@ public class MyUser implements Serializable {
 
     private boolean credentialsNonExpired= true;
 
-    private boolean enabled= true;
+    private boolean enabled = true;
+    
+    private Set<GrantedAuthority> authorities;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	@Override
+	public String getPassword() {
+		return pwd;
+	}
+
+	@Override
+	public String getUsername() {
+		return loginName;
+	}
 
 }
