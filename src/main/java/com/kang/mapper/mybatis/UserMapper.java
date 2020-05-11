@@ -1,5 +1,7 @@
 package com.kang.mapper.mybatis;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.kang.common.mapper.BaseMapper;
 import com.kang.model.MyUser;
 
@@ -11,4 +13,6 @@ import com.kang.model.MyUser;
  */
 public interface UserMapper extends BaseMapper<MyUser>{
 
+	@Select(value = "select role_name from tb_role where id = #{roleId}")
+	public String getRoleName(Long roleId);
 }

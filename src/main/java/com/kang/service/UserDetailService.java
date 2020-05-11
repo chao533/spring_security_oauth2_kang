@@ -28,6 +28,6 @@ public class UserDetailService implements UserDetailsService {
     	}
         return new User(username, user.getPwd(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList(userMapper.getRoleName(user.getId())));
     }
 }
