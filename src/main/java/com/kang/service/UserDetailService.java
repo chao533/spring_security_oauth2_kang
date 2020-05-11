@@ -1,46 +1,33 @@
 package com.kang.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+import com.kang.mapper.mybatis.UserMapper;
 import com.kang.model.MyUser;
 
-@Configuration
+@Component
 public class UserDetailService implements UserDetailsService {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private UserMapper userMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // 模拟一个用户，替代数据库获取逻辑
-        MyUser user = new MyUser();
-        user.setUserName(username);
-        user.setPassword(this.passwordEncoder.encode("123456"));
-        // 输出加密后的密码
-        System.out.println(user.getPassword());
-        if(username.equals("zs")) {
-        	throw new RuntimeException("21");
-        }
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        if (StringUtils.equalsIgnoreCase("mrbird", username)) {
-            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
-        } else {
-            authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("test");
-        }
-        return new User(username, user.getPassword(), user.isEnabled(),
+    	MyUser record = new MyUser();
+    	record.setLoginName(username);
+    	MyUser user = userMapper.selectOne(record);
+    	if(user == null) {
+    		throw new InternalAuthenticationServiceException("该用户不存在");
+    	}
+        return new User(username, user.getPwd(), user.isEnabled(),
                 user.isAccountNonExpired(), user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(), authorities);
+                user.isAccountNonLocked(), AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

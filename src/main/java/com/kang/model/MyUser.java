@@ -1,15 +1,66 @@
 package com.kang.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+　 * <p>Title: User</p> 
+　 * <p>Description: 用户实体类</p> 
+　 * @author CK 
+　 * @date 2020年4月20日
+ */
+@Setter
+@Getter
+@Entity
+@Table(name="tb_user")
 public class MyUser implements Serializable {
-    private static final long serialVersionUID = 3497935890426858541L;
 
-    private String userName;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7492073808779282862L;
 
-    private String password;
+	@Id
+	private Long id;
 
-    private boolean accountNonExpired = true;
+	private String loginName;
+
+	private String pwd;
+	
+	
+	private String userName;
+
+	private String tel;
+	
+	private String icon;
+
+	private Boolean gender;
+
+	private Date birthday;
+
+	private String email;
+
+	private String addr;
+
+	private Date createTime;
+
+	private Boolean isDel;
+	
+	private Long roleId;
+	
+	@Transient
+	private String roleName;
+	
+	private boolean accountNonExpired = true;
 
     private boolean accountNonLocked= true;
 
@@ -17,51 +68,4 @@ public class MyUser implements Serializable {
 
     private boolean enabled= true;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 }
