@@ -26,6 +26,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kang.common.constant.Oauth2Constant;
 import com.kang.common.msg.ErrorCode;
 import com.kang.common.msg.Message;
 import com.kang.common.utils.ResponseUtils;
@@ -45,7 +46,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 1. 从请求头中获取 ClientId
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader(Oauth2Constant.TOKEN_HEADER);
         if (header == null || !header.startsWith("Basic ")) {
             throw new UnapprovedClientAuthenticationException("请求头中无client信息");
         }
