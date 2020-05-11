@@ -16,4 +16,8 @@ public class Oauth2Constant {
 	
 	public static final String SIGNING_KEY = PropConstants.getProp_2(PropConstants.OAUTH2_PROP, PropConstants.oauth2Key.SIGNING_KEY);
 	
+	public static final String TOKEN_PREFIX = PropConstants.getProp_2(PropConstants.OAUTH2_PROP, PropConstants.oauth2Key.TOKEN_PREFIX);
+	
+	public static final String TOKEN_HEADER = PropConstants.getProp_2(PropConstants.OAUTH2_PROP, PropConstants.oauth2Key.TOKEN_HEADER);
+	
 }

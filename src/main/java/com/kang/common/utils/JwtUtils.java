@@ -20,8 +20,8 @@ public class JwtUtils {
 
 	
 	public static Map<String,Object> getUser(){
-		String header = getRequest().getHeader("Authorization");
-	    String token = StringUtils.substringAfter(header, "Bearer ");
+		String header = getRequest().getHeader(Oauth2Constant.TOKEN_HEADER);
+	    String token = StringUtils.substringAfter(header, Oauth2Constant.TOKEN_PREFIX + " ");
 	    Map<String,Object> body = Jwts.parser().setSigningKey(Oauth2Constant.SIGNING_KEY.getBytes(StandardCharsets.UTF_8)).parseClaimsJws(token).getBody();
 	    
 	    // 重新构造返回Token存储的信息

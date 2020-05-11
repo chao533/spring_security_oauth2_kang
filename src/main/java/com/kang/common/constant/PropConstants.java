@@ -31,6 +31,10 @@ public class PropConstants {
 		String GRANT_TYPES = "oauth2.authorized.grant.types";
 		
 		String SIGNING_KEY = "oauth2.signing.key";
+		
+		String TOKEN_PREFIX = "oauth2.token.prefix";
+		
+		String TOKEN_HEADER = "oauth2.token.header";
 	}
 	
 	/**
