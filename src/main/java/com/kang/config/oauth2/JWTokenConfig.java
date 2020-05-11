@@ -32,7 +32,7 @@ public class JWTokenConfig {
     
     /**
      * <p>Title: tokenEnhancer</p>
-     * <p>Description: JWT添加信息的Bean</p>
+     * <p>Description: JWT添加信息的Bean(token增强器)</p>
      * @param @return
      */
     @Bean

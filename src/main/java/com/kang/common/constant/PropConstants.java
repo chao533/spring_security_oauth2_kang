@@ -33,6 +33,16 @@ public class PropConstants {
 		String SIGNING_KEY = "oauth2.signing.key";
 	}
 	
+	/**
+	 * 私钥
+	 */
+	public static final String PRIVATE_KEY = "config/privateKey.cert";
+	
+	/**
+	 * 公钥
+	 */
+	public static final String PUBLIC_KEY = "config/publicKey.cert";
+	
 	
 	
 	public static String getProp_2(String file, String key) {

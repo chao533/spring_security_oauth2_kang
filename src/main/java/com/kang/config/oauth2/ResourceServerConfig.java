@@ -31,7 +31,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .failureHandler(authenticationFailureHandler) // 处理登录失败
             .and()
                 .authorizeRequests() // 授权配置
-                .anyRequest()  // 所有请求
+                .antMatchers("/demo").permitAll() // 放行
+                .antMatchers("/**")
                 .authenticated() // 都需要认证
             .and()
                 .csrf().disable();
