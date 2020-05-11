@@ -8,10 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kang.common.msg.Message;
-
-import cn.hutool.json.JSONUtil;
-
 /**
  * <p>Title: ResponseUtils</p>  
  * <p>Description: 响应数据格式工具类</p>  
