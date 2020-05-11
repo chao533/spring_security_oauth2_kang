@@ -3,3 +3,6 @@ http://localhost:8080/oauth/authorize?response_type=code&client_id=test&redirect
 
 #密码模式
 http://localhost:8080/oauth/token?grant_type=password&username=mrbird&password=123456&scope=all
+
+#默认登录接口
+http://localhost:8080/login?username=zs&password=123456

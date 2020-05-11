@@ -8,7 +8,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,11 @@ import org.springframework.security.oauth2.provider.TokenRequest;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kang.common.msg.ErrorCode;
+import com.kang.common.msg.Message;
+import com.kang.common.utils.ResponseUtils;
 
 @Component
 public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandler {
@@ -75,8 +79,10 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
 
         // 8. 返回 Token
         log.info("登录成功");
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(new ObjectMapper().writeValueAsString(token));
+//        response.setContentType("application/json;charset=UTF-8");
+//        response.getWriter().write();
+        Message<?> mess = new Message<>(ErrorCode.SUCCESS_LOGIN,token);
+        ResponseUtils.responseResult(response, new ObjectMapper().writeValueAsString(mess));
     }
 
     private String[] extractAndDecodeHeader(String header, HttpServletRequest request) {

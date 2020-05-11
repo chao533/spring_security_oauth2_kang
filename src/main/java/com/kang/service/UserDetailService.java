@@ -30,7 +30,9 @@ public class UserDetailService implements UserDetailsService {
         user.setPassword(this.passwordEncoder.encode("123456"));
         // 输出加密后的密码
         System.out.println(user.getPassword());
-
+        if(username.equals("zs")) {
+        	throw new RuntimeException("21");
+        }
         List<GrantedAuthority> authorities = new ArrayList<>();
         if (StringUtils.equalsIgnoreCase("mrbird", username)) {
             authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
