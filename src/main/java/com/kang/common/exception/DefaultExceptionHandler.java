@@ -18,7 +18,12 @@ public class DefaultExceptionHandler {
 
     @ExceptionHandler(InternalAuthenticationServiceException.class)
     public Message<String> processInternalAuthenticationServiceException(InternalAuthenticationServiceException e) {
-        return new Message<String>(ErrorCode.ERROR_LOGIN,e.getMessage());
+        return new Message<String>(ErrorCode.ERROR_LOGIN.getCode(),e.getMessage());
+    }
+    
+    @ExceptionHandler(ServiceException.class)
+    public Message<String> processServiceException(ServiceException e) {
+        return new Message<String>(ErrorCode.ERROR,e.getMessage());
     }
     
     

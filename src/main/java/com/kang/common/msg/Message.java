@@ -20,6 +20,13 @@ public class Message<T> implements Serializable{
 	
 	private T data; // 数据
 	
+	public Message(int code,String msg) {
+		this.code = code;
+		this.msg = msg;
+		this.status = this.code == 200 ? true : false;
+	}
+	
+	
 	public Message(ErrorCode errorCode) {
 		this.code = errorCode.getCode();
 		this.msg = errorCode.getMsg();
