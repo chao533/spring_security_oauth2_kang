@@ -1,8 +1,6 @@
 package com.kang.config.oauth2.handler;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -46,14 +43,17 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         // 1. 从请求头中获取 ClientId
-        String header = request.getHeader(Oauth2Constant.TOKEN_HEADER);
-        if (header == null || !header.startsWith("Basic ")) {
-            throw new UnapprovedClientAuthenticationException("请求头中无client信息");
-        }
-
-        String[] tokens = this.extractAndDecodeHeader(header, request);
-        String clientId = tokens[0];
-        String clientSecret = tokens[1];
+//        String header = request.getHeader(Oauth2Constant.TOKEN_HEADER);
+//        if (header == null || !header.startsWith("Basic ")) {
+//            throw new UnapprovedClientAuthenticationException("请求头中无client信息");
+//        }
+//
+//        String[] tokens = this.extractAndDecodeHeader(header, request);
+//        String clientId = tokens[0];
+//        String clientSecret = tokens[1];
+    	
+    	String clientId = Oauth2Constant.CLIENT;
+    	String clientSecret = Oauth2Constant.SECRET;
 
         TokenRequest tokenRequest = null;
 
@@ -86,7 +86,7 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         ResponseUtils.responseResult(response, new ObjectMapper().writeValueAsString(mess));
     }
 
-    private String[] extractAndDecodeHeader(String header, HttpServletRequest request) {
+    /*private String[] extractAndDecodeHeader(String header, HttpServletRequest request) {
         byte[] base64Token = header.substring(6).getBytes(StandardCharsets.UTF_8);
 
         byte[] decoded;
@@ -103,5 +103,5 @@ public class MyAuthenticationSucessHandler implements AuthenticationSuccessHandl
         } else {
             return new String[]{token.substring(0, delim), token.substring(delim + 1)};
         }
-    }
+    }*/
 }
